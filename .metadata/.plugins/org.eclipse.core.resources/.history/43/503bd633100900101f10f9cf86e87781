@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<img src="img/ssafy_logo.png" id="ssafy_logo"><br>
+안녕! CORS - 2 - 18080<br>
+
+<!-- axios lib -->
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+    axios
+    .get("http://localhost:8080/hello")
+    .then((response) => {
+      alert(response.data)
+      console.log(response)
+    })
+    .catch((error) => {
+      alert("fail")
+      console.log(error)
+    });          
+</script>
+</body>
+</html>

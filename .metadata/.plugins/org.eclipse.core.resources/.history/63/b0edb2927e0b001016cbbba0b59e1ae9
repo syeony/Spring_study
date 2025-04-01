@@ -1,0 +1,78 @@
+package com.ssafy.cafe.model.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.ssafy.cafe.model.dao.OrderDao;
+import com.ssafy.cafe.model.dao.OrderDetailDao;
+import com.ssafy.cafe.model.dao.StampDao;
+import com.ssafy.cafe.model.dao.UserDao;
+import com.ssafy.cafe.model.dto.Order;
+import com.ssafy.cafe.model.dto.OrderDetailInfo;
+import com.ssafy.cafe.model.dto.OrderInfo;
+
+@Service
+public class OrderServiceImpl implements OrderService {
+
+    @Autowired
+    OrderDao oDao;
+    
+    @Autowired
+    OrderDetailDao dDao;
+    
+    @Autowired
+    StampDao sDao;
+    
+    @Autowired
+    UserDao uDao;
+    
+    @Override
+    public void makeOrder(Order order) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public Order getOrderDetails(Integer orderId) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public List<Order> getOrderByUser(String id) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public void updateOrder(Order order) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public OrderInfo getOrderInfo(Integer orderId) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public List<OrderInfo> getLastMonthOrder(String id) {
+        List<OrderInfo> info = oDao.getLastMonthOrder(id); 
+        for (OrderInfo orderInfo : info) {
+            List<OrderDetailInfo> detailInfo = oDao.getOrderDetailInfo(orderInfo.getId());
+            orderInfo.setDetails(detailInfo);
+        }
+        
+        return info;
+    }
+    
+    @Override
+    public List<OrderInfo> getLast6MonthOrder(String id) {
+        return oDao.getLast6MonthOrder(id);
+    }
+
+
+}

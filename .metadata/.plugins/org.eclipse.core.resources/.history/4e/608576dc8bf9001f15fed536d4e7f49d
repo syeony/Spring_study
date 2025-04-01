@@ -1,0 +1,48 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Insert title here</title>
+<style>
+        table {
+            width: 50%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+<h1>detail.jsp</h1>
+<table>
+        <tr>
+            <th>ISBN</th>
+            <td>111-222-3333</td>
+        </tr>
+        <tr>
+            <th>Title</th>
+            <td>인생</td>
+        </tr>
+        <tr>
+            <th>Author</th>
+            <td>송진</td>
+        </tr>
+        <tr>
+            <th>Price</th>
+            <td>10000</td>
+        </tr>
+        <tr>
+            <th>Content</th>
+            <td>인생이란 무엇일까</td>
+        </tr>
+    </table>
+</body>
+</html>

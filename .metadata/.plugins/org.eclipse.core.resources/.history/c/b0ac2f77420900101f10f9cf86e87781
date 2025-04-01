@@ -1,0 +1,26 @@
+package com.ssafy.ws.controller;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.ssafy.ws.util.InvalidNumberFormatException;
+
+@ControllerAdvice
+public class ExceptionController {
+	
+	private static final Logger log = LoggerFactory.getLogger(ExceptionController.class);
+	
+	@ExceptionHandler(InvalidNumberFormatException.class)
+	public ModelAndView myError(final InvalidNumberFormatException e) {
+		ModelAndView mv = new ModelAndView();
+		
+		mv.addObject("msg", "입력된 ISBN과 동일한 ISBN이 존재합니다.");
+		mv.setViewName("/error/commonerr");
+		
+		return mv;
+	}
+}

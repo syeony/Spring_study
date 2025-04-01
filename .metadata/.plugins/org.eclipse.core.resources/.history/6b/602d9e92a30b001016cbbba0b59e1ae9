@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.cafe.model.dao.UserDao">
+	<insert id="insert" parameterType="com.ssafy.cafe.model.dto.User">
+    INSERT INTO t_user (id, name, pass)
+    VALUES (#{id}, #{name}, #{pass})
+	</insert>
+	
+	<select id="selectById" parameterType="String" resultType="com.ssafy.cafe.model.dto.User">
+    SELECT id, name, pass
+    FROM t_user
+    WHERE id = #{id}
+	</select>
+
+	<select id="selectByUser" parameterType="com.ssafy.cafe.model.dto.User" resultType="com.ssafy.cafe.model.dto.User">
+    SELECT id, name, pass
+    FROM t_user
+    WHERE id = #{id} AND pass = #{pass}
+	</select>
+
+
+	<update id="updateStamp" parameterType="com.ssafy.cafe.model.dto.User">
+    UPDATE t_user
+    SET stamps = #{stamps}
+    WHERE id = #{id}
+	</update>
+
+</mapper>

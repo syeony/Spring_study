@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+
+<mapper namespace="com.ssafy.ws.mapper.BookMapper">  
+	
+	<select id="listArticle" resultType="Book">  
+		select isbn, title, author, price, content from book order by isbn desc
+	</select>  
+	
+	<select id="getArticle" parameterType="String" resultType="Book">
+		select isbn, title, author, price, content from book where isbn = #{id}
+	</select>
+	
+	<select id="bookInfoWithComment" parameterType="String" resultType="Comment">
+		select * from comment where isbn = #{id}
+	</select>
+	
+	<insert id="writeArticle" parameterType="Book" useGeneratedKeys="true" keyProperty="isbn">
+		insert into book (isbn, title, author, price, content) values (#{isbn}, #{title}, #{author}, #{price}, #{content})
+	</insert>
+	
+	<update id="updateArticle" parameterType="Book">
+		update book set title=#{title}, author=#{author}, price=#{price}, content=#{content} where isbn = #{isbn}
+	</update>
+	
+	<delete id="deleteArticle" parameterType="String">
+		delete from book where isbn = #{isbn}
+	</delete>
+	
+</mapper> 

@@ -1,0 +1,45 @@
+package com.ssafy.hello.util;
+
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+
+public class MyException extends RuntimeException {
+	private String code;
+	
+	public MyException(String code, String msg) {
+		super(msg); //메시지는 런타임에 넘겨주고
+		this.code=code; //코드는 내가 갖고 있고 
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+	
+	// /hello2?error=yes
+	@GetMapping("/hello2")
+	public String hello2(String error)
+	{
+		//잘못된 상황이 발생.. 
+		if("yes".equals(error)) {
+			throw new MyException("101","something wrong...");
+		}
+		return "hello2";
+	}
+	
+	@ExceptionHandler(MyException.class)
+	public ModelAndView myError(MyException e) {
+		ModelAndView mv=new ModelAndView();
+		
+		mv.addObject("msg","알 수 없는 오류입니다.");
+		
+		mv.setViewName("/error/common"); //WEB-INF/views "이름" + .jsp
+		return mv;
+	}
+	
+}

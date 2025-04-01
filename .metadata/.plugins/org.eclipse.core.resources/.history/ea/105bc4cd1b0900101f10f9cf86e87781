@@ -1,0 +1,48 @@
+package com.ssafy.hello.controller;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.ssafy.hello.util.MyException;
+
+@Controller
+public class HelloController {
+
+    private static final Logger log = LoggerFactory.getLogger(HelloController.class);
+
+    
+    @GetMapping("/hello")
+    public String home(Model model) {
+        model.addAttribute("msg", "안녕! 스프링!");
+        return "index.html";
+    }
+    
+    // /hello2?error=yes
+    @GetMapping("/hello2")
+    public String hello2(@RequestParam String error) {
+        //잘못된 상황이 발생..
+        if("yes".equals(error)) {
+            throw new MyException("101", "something wrong...");
+        }
+        
+        return "hello2";
+    }
+    
+    
+    @ExceptionHandler(MyException.class)
+    public ModelAndView myError(MyException e) {
+        ModelAndView mv = new ModelAndView();
+        
+        mv.addObject("msg", "시스템 오류가 발생했습니다.");
+        
+        mv.setViewName("/error/commonerr"); // WEB-INF/view + "이름" + .jsp
+        
+        return mv;
+    }
+    
+}
